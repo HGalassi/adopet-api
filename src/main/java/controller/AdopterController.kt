@@ -1,11 +1,17 @@
 package controller
 
-import model.AdopterModel
-import retrofit2.Call
-import retrofit2.http.GET
+import entity.Adopter
+import service.AdopterService
+import javax.transaction.Transactional
+import javax.ws.rs.POST
+import javax.ws.rs.Path
 
-interface AdopterController {
+@Path("")
+class AdopterController (private val adopterService: AdopterService) {
 
-    @GET("posts")
-    fun getPosts() : Call<List<AdopterModel>>
+    @POST
+    @Path("/add")
+    @Transactional
+    fun addArtist(listAdopters: List<Adopter>) = adopterService.addAdopters(listAdopters)
+
 }
